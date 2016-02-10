@@ -1,13 +1,13 @@
-# Wiegand NG - Multi Bits Wiegand library for Arduino
+# Wiegand NG - Multi Bit Wiegand Library for Arduino
 
-This library is re-written from [Wiegand 24 and Wiegand 36 Protocol Library for Arduino](https://github.com/monkeyboard/Wiegand-Protocol-Library-for-Arduino) because the original library was coded to only detect 8, 263 and 34 bit Wiegand based on this [Wiegand RFID Reader] (http://www.monkeyboard.org/products/85-developmentboard/84-rfid-wiegand-protocol-development-kit).
+This library is re-written from [Wiegand 24 and Wiegand 36 Protocol Library for Arduino](https://github.com/monkeyboard/Wiegand-Protocol-Library-for-Arduino) because the original library was coded to only detect 8, 26 and 34 bit Wiegand based on this [Wiegand RFID Reader] (http://www.monkeyboard.org/products/85-developmentboard/84-rfid-wiegand-protocol-development-kit).
 
 Wiegand NG supports unlimited bits (maximum memory allocatable by Arduino) and also support third party decoding scheme to be added. The original suggestion came from [digitalentropy](https://github.com/digitalentropy) after submitting an issue on the original library's github page.
 
 ## Features
 
-* unlimited bits (maximum memory allocatable by Arduino.
-* third party decoding plugin support
+* unlimited bits (maximum memory allocatable by Arduino)
+* third party decoding support
 * customizable pulseGap
 * 3 Wiegand Readers when using Arduino Mega (untested)
 
@@ -26,7 +26,7 @@ Create a folder named Wiegand in Arduino's libraries folder.  You will have the 
 	cd arduino/libraries
 	mkdir WiegandNG
 	cd WiegandNG
-	git clone https://github.com/jpliew/Wiegand-NG-Multi-Bit-Wiegand-Library-for-Arduino .
+	git clone https://github.com/jpliew/Wiegand-NG-Multi-Bit-Wiegand-Library-for-Arduino.git .
 
 ## Arduino Sketch
 
@@ -37,7 +37,6 @@ Execute Arduino IDE, select Example-->WiegandNG-->WiegandRawTest
 
 ### Example
 <pre><code>
-
 #include &lt;WiegandNG.h&gt;
 
 WiegandNG wg;
@@ -83,7 +82,7 @@ void loop() {
 </code></pre>
 
 ## Acknowledgement
-The base and original concept is based on the [Wiegand 24 and Wiegand 36 Protocol Library for Arduino](https://github.com/monkeyboard/Wiegand-Protocol-Library-for-Arduino), contributions from community listed on the page.
+The library is based on the [Wiegand 24 and Wiegand 36 Protocol Library for Arduino](https://github.com/monkeyboard/Wiegand-Protocol-Library-for-Arduino) and contributions from community listed on the page.
 
 Written by JP Liew
 
