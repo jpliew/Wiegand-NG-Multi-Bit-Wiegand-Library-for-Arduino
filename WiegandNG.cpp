@@ -1,16 +1,16 @@
 #include <WiegandNG.h>
 
-volatile unsigned long 	WiegandNG::_lastPulseTime;	// time last bit pulse received
-volatile int 			WiegandNG::_bitCounted;		// number of bits arrived at Interrupt pins
-volatile unsigned char *WiegandNG::_buffer;			// buffer for data retention
+volatile unsigned long	WiegandNG::_lastPulseTime;	// time last bit pulse received
+volatile int			WiegandNG::_bitCounted;		// number of bits arrived at Interrupt pins
+volatile unsigned char	*WiegandNG::_buffer;		// buffer for data retention
 int						WiegandNG::_bufferSize;		// memory (bytes) allocated for buffer
 
 void shift_left(volatile unsigned char *ar, int size, int shift)
 {
-	while (shift--) {                           	// For each bit to shift ...
-		int carry = 0;                          	// Clear the initial carry bit.
+	while (shift--) {								// For each bit to shift ...
+		int carry = 0;								// Clear the initial carry bit.
 		int lastElement = size-1;
-		for (int i = 0; i < size; i++) {   			// For each element of the array, from low byte to high byte
+		for (int i = 0; i < size; i++) {			// For each element of the array, from low byte to high byte
 			if (i!=lastElement) {
 				// condition ? valueIfTrue : valueIfFalse
 				carry = (ar[i+1] & 0x80) ? 1 : 0;
@@ -26,7 +26,7 @@ void shift_left(volatile unsigned char *ar, int size, int shift)
 void WiegandNG::clear() {							// reset variables to start new capture
 	_bitCounted=0;
 	_lastPulseTime = millis();
-	memset((unsigned char *)_buffer,0,_bufferSize);	
+	memset((unsigned char *)_buffer,0,_bufferSize);
 	interrupts();									// allow interrupt
 }
 
@@ -39,7 +39,7 @@ volatile unsigned char * WiegandNG::getRawData() {
 }
 
 int WiegandNG::getPacketGap() {
-	return _packetGap;	
+	return _packetGap;
 }
 
 int WiegandNG::getBitAllocated() {
