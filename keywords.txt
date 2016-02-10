@@ -1,0 +1,27 @@
+#######################################
+# Syntax Coloring Map For Wiegand NG Library
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+WiegandNG			KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin				KEYWORD2
+available			KEYWORD2
+clear				KEYWORD2
+pause				KEYWORD2
+getBitCounted		KEYWORD2
+getBitAllocated		KEYWORD2
+getBufferSize		KEYWORD2
+getPacketGap		KEYWORD2
+getRawData			KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
