@@ -1,16 +1,19 @@
 #include <WiegandNG.h>
 
+// pcintbranch
+
 volatile unsigned long	WiegandNG::_lastPulseTime;	// time last bit pulse received
-volatile int			WiegandNG::_bitCounted;		// number of bits arrived at Interrupt pins
+volatile unsigned int	WiegandNG::_bitCounted;		// number of bits arrived at Interrupt pins
 volatile unsigned char	*WiegandNG::_buffer;		// buffer for data retention
-int						WiegandNG::_bufferSize;		// memory (bytes) allocated for buffer
+unsigned int			WiegandNG::_bufferSize;		// memory (bytes) allocated for buffer
+
 
 void shift_left(volatile unsigned char *ar, int size, int shift)
 {
-	while (shift--) {								// For each bit to shift ...
-		int carry = 0;								// Clear the initial carry bit.
+	while (shift--) {								// for each bit to shift ...
+		int carry = 0;								// clear the initial carry bit.
 		int lastElement = size-1;
-		for (int i = 0; i < size; i++) {			// For each element of the array, from low byte to high byte
+		for (int i = 0; i < size; i++) {			// for each element of the array, from low byte to high byte
 			if (i!=lastElement) {
 				// condition ? valueIfTrue : valueIfFalse
 				carry = (ar[i+1] & 0x80) ? 1 : 0;
@@ -38,19 +41,19 @@ volatile unsigned char * WiegandNG::getRawData() {
 	return _buffer;									// return pointer of the buffer
 }
 
-int WiegandNG::getPacketGap() {
+unsigned int WiegandNG::getPacketGap() {
 	return _packetGap;
 }
 
-int WiegandNG::getBitAllocated() {
+unsigned int WiegandNG::getBitAllocated() {
 	return _bitAllocated;
 }
 
-int WiegandNG::getBitCounted() {
+unsigned int WiegandNG::getBitCounted() {
 	return _bitCounted;
 }
 
-int WiegandNG::getBufferSize() {
+unsigned int WiegandNG::getBufferSize() {
 	return _bufferSize;
 }
 
@@ -70,19 +73,23 @@ bool WiegandNG::available() {
 }
 
 void WiegandNG::ReadD0 () {
-	_bitCounted++;									// Increment bit count for Interrupt connected to D0
+	_bitCounted++;									// increment bit count for Interrupt connected to D0
 	shift_left(_buffer,_bufferSize,1);				// shift 0 into buffer
-	_lastPulseTime = millis();						// Keep track of time last wiegand bit received
+	_lastPulseTime = millis();						// keep track of time last wiegand bit received
 }
 
 void WiegandNG::ReadD1() {
-	_bitCounted++;									// Increment bit count for Interrupt connected to D1
-	shift_left(_buffer,_bufferSize,1);				// shift 1 into buffer
-	_buffer[_bufferSize-1] |=1;						// set last bit 1
-	_lastPulseTime = millis();						// Keep track of time last wiegand bit received
+	_bitCounted++;									// increment bit count for Interrupt connected to D1
+	if (_bitCounted > (_bufferSize * 8)) {
+		_bitCounted=0;								// overflowed, 
+	} else {
+		shift_left(_buffer,_bufferSize,1);			// shift 1 into buffer
+		_buffer[_bufferSize-1] |=1;					// set last bit 1
+		_lastPulseTime = millis();					// keep track of time last wiegand bit received
+	}
 }
 
-bool WiegandNG::begin(int allocateBits, int packetGap) {
+bool WiegandNG::begin(unsigned int allocateBits, unsigned int packetGap) {
 #ifdef digitalPinToInterrupt
 	// newer versions of Arduino provide pin to interrupt mapping
 	begin(2,digitalPinToInterrupt(2),3,digitalPinToInterrupt(3), allocateBits, packetGap);
@@ -91,7 +98,7 @@ bool WiegandNG::begin(int allocateBits, int packetGap) {
 #endif
 }
 
-bool WiegandNG::begin(int pinD0, int pinIntD0, int pinD1, int pinIntD1, int allocateBits, int packetGap) {
+bool WiegandNG::begin(uint8_t pinD0, uint8_t pinIntD0, uint8_t pinD1, uint8_t pinIntD1, unsigned int allocateBits, unsigned int packetGap) {
 	if (_buffer != NULL) {
 		delete [] _buffer;
 	}
@@ -105,10 +112,10 @@ bool WiegandNG::begin(int pinD0, int pinIntD0, int pinD1, int pinIntD1, int allo
 
 	clear();
 	
-	pinMode(pinD0, INPUT);								// Set D0 pin as input
-	pinMode(pinD1, INPUT);								// Set D1 pin as input
-	attachInterrupt(pinIntD0, ReadD0, FALLING);			// Hardware interrupt - high to low pulse
-	attachInterrupt(pinIntD1, ReadD1, FALLING);			// Hardware interrupt - high to low pulse
+	pinMode(pinD0, INPUT);								// set D0 pin as input
+	pinMode(pinD1, INPUT);								// set D1 pin as input
+	attachInterrupt(pinIntD0, ReadD0, FALLING);			// hardware interrupt - high to low pulse
+	attachInterrupt(pinIntD1, ReadD1, FALLING);			// hardware interrupt - high to low pulse
 	return true;
 }
 
