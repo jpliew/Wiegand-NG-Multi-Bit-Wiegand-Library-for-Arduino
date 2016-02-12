@@ -21,7 +21,7 @@ private:
 	static volatile unsigned char *	_buffer;			// buffer for data retention
 	
 public:
-	bool begin(int bits, int pulseGap=25);				// default pulseGap is 25ms
+	bool begin(int bits, int packetGap=25);				// default packetGap is 25ms
 	bool begin(int pinD0, int pinIntD0, int pinD1, int pinIntD1, int bits, int packetGap);
 	bool available();
 	void clear();
