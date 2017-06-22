@@ -94,7 +94,10 @@ void loop() {
 ## Acknowledgement
 The library is based on the [Wiegand 24 and Wiegand 36 Protocol Library for Arduino](https://github.com/monkeyboard/Wiegand-Protocol-Library-for-Arduino) and contributions from community listed on the page.
 
-Written by JP Liew
+## Contributors
+[zanhecht](https://github.com/zanhecht) Fix handling of partial bytes.
+
+Written by [JP Liew](http://jpliew.com)
 
 Project home: http://www.monkeyboard.org/tutorials/82-protocol/24-wiegand-converter
 
