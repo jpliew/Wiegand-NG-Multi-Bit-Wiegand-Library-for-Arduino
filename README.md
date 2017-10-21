@@ -1,6 +1,6 @@
 # Wiegand NG - Multi Bit Wiegand Library for Arduino
 
-This library is re-written from [Wiegand 24 and Wiegand 36 Protocol Library for Arduino](https://github.com/monkeyboard/Wiegand-Protocol-Library-for-Arduino) because the original library was coded to only detect 8, 26 and 34 bit Wiegand based on this [Wiegand RFID Reader] (http://www.monkeyboard.org/products/85-developmentboard/84-rfid-wiegand-protocol-development-kit).
+This library is re-written from [Wiegand 24 and Wiegand 36 Protocol Library for Arduino](https://github.com/monkeyboard/Wiegand-Protocol-Library-for-Arduino) because the original library was coded to only detect 8, 26 and 34 bit Wiegand based on this [Wiegand RFID Reader](http://www.monkeyboard.org/products/85-developmentboard/84-rfid-wiegand-protocol-development-kit).
 
 Wiegand NG supports unlimited bits (maximum memory allocatable by Arduino) and also support third party decoding scheme to be added. The original suggestion came from [digitalentropy](https://github.com/digitalentropy) after submitting an issue on the original library's github page.
 
