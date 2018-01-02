@@ -47,7 +47,7 @@ void PrintBinary(WiegandNG tempwg) {
 	unsigned int countedBits = tempwg.getBitCounted();
 
 	unsigned int countedBytes = (countedBits/8);
-	if ((countedBytes % 8)>0) countedBytes++;
+	if ((countedBits % 8)>0) countedBytes++;
 	unsigned int bitsUsed = countedBytes * 8;
 	
 	for (int i=bufferSize-countedBytes; i< bufferSize;i++) {
