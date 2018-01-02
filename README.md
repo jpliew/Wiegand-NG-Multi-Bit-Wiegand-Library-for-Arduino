@@ -83,12 +83,12 @@ void setup() {
 
 void loop() {
 	if(wg.available()) {
-		wg.pause();		// pause Wiegand pin interrupts
+		wg.pause(); // pause Wiegand pin interrupts
 		Serial.print("Bits=");
 		Serial.println(wg.getBitCounted()); // display the number of bits counted
 		Serial.print("RAW Binary=");
-		PrintBinary(wg);	// display raw data in binary form, raw data inclusive of PARITY
-		wg.clear();		// compulsory to call clear() to enable interrupts for subsequent data
+		PrintBinary(wg); // display raw data in binary form, raw data inclusive of PARITY
+		wg.clear(); // compulsory to call clear() to enable interrupts for subsequent data
 	}
 
 }
