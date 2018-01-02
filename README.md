@@ -70,8 +70,11 @@ void PrintBinary(WiegandNG tempwg) {
 void setup() {
 	Serial.begin(9600);
 
-	// initialize Wiegand ND for 34 bit data, every 8 bits take up 1 byte of Arduino memory
-	// as long as there is still memory, user can even capture 1024 bit Wiegand by calling begin(1024)
+	// initialize Wiegand ND for 34 bit data, 
+	// every 8 bits take up 1 byte of Arduino memory
+	// as long as there is still memory, user can even
+	// capture 1024 bit Wiegand by calling begin(1024)
+	
 	if(!wg.begin(1024)) {										
 		Serial.println("Out of memory!");
 	}
@@ -80,12 +83,12 @@ void setup() {
 
 void loop() {
 	if(wg.available()) {
-		wg.pause();							// pause Wiegand pin interrupts
+		wg.pause();		// pause Wiegand pin interrupts
 		Serial.print("Bits=");
-		Serial.println(wg.getBitCounted());	// display the number of bits counted
+		Serial.println(wg.getBitCounted()); // display the number of bits counted
 		Serial.print("RAW Binary=");
-		PrintBinary(wg);					// display raw data in binary form, raw data inclusive of PARITY
-		wg.clear();							// compulsory to call clear() to enable interrupts for subsequent data
+		PrintBinary(wg);	// display raw data in binary form, raw data inclusive of PARITY
+		wg.clear();		// compulsory to call clear() to enable interrupts for subsequent data
 	}
 
 }
