@@ -74,8 +74,8 @@ void setup() {
 	// initialize Wiegand ND for 48 bit data, every 8 bits take up 1 byte of Arduino memory
 	// as long as there is still memory, user can even capture 1024 bit Wiegand by calling wg.begin(1024)
 
-	unsigned int pinD0 = 21;
-	unsigned int pinD1 = 23;
+	unsigned int pinD0 = 2;
+	unsigned int pinD1 = 3;
 	unsigned int wiegandbits = 48;
 	unsigned int packetGap = 15;			// 25 ms between packet
 	
