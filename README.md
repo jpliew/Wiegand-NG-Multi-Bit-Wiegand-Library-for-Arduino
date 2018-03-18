@@ -37,7 +37,7 @@ Execute Arduino IDE, select Example-->WiegandNG-->WiegandRawTest
 
 ### Example
 ```c
-#include &lt;WiegandNG.h&gt;
+#include <WiegandNG.h>
 
 WiegandNG wg;
 
