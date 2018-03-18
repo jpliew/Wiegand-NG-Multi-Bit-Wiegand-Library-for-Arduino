@@ -21,7 +21,7 @@ private:
 	
 public:
 	bool begin(unsigned int bits, unsigned int packetGap=25);				// default packetGap is 25ms
-	bool begin(uint8_t pinD0, uint8_t pinIntD0, uint8_t pinD1, uint8_t pinIntD1, unsigned int bits, unsigned int packetGap);
+	bool begin(uint8_t pinD0, uint8_t pinD1, unsigned int bits, unsigned int packetGap);
 	bool available();
 	void clear();
 	void pause();

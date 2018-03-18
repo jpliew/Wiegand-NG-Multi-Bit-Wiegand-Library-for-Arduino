@@ -59,9 +59,23 @@ unsigned int WiegandNG::getBufferSize() {
 
 bool WiegandNG::available() {
 	bool ret=false;
+	noInterrupts();
+	unsigned long tempLastPulseTime = _lastPulseTime;
+	interrupts();
+
 	unsigned long sysTick = millis();
-	if ((sysTick - _lastPulseTime) > _packetGap) {	// _packetGap (ms) laps
+	//	if ((sysTick - _lastPulseTime) > _packetGap) {	// _packetGap (ms) laps
+	if ((sysTick - tempLastPulseTime) > _packetGap) {	// _packetGap (ms) laps
 		if(_bitCounted>0) {							// bits found, must have data, return true
+			if(_bitCounted<8) {
+				Serial.print(_bitCounted);
+				Serial.print(", ");
+				Serial.print(sysTick);
+				Serial.print(", ");
+				Serial.print(_lastPulseTime);
+				Serial.print(",");
+				Serial.println(tempLastPulseTime);
+			}
 			ret=true;
 		}
 		else
@@ -90,15 +104,13 @@ void WiegandNG::ReadD1() {
 }
 
 bool WiegandNG::begin(unsigned int allocateBits, unsigned int packetGap) {
-#ifdef digitalPinToInterrupt
+	bool ret;
 	// newer versions of Arduino provide pin to interrupt mapping
-	begin(2,digitalPinToInterrupt(2),3,digitalPinToInterrupt(3), allocateBits, packetGap);
-#else
-	begin(2,0,3,1, allocateBits, packetGap);
-#endif
+	ret=begin(2, 3, allocateBits, packetGap);
+	return ret;
 }
 
-bool WiegandNG::begin(uint8_t pinD0, uint8_t pinIntD0, uint8_t pinD1, uint8_t pinIntD1, unsigned int allocateBits, unsigned int packetGap) {
+bool WiegandNG::begin(uint8_t pinD0, uint8_t pinD1, unsigned int allocateBits, unsigned int packetGap) {
 	if (_buffer != NULL) {
 		delete [] _buffer;
 	}
@@ -114,8 +126,8 @@ bool WiegandNG::begin(uint8_t pinD0, uint8_t pinIntD0, uint8_t pinD1, uint8_t pi
 	
 	pinMode(pinD0, INPUT);								// set D0 pin as input
 	pinMode(pinD1, INPUT);								// set D1 pin as input
-	attachInterrupt(pinIntD0, ReadD0, FALLING);			// hardware interrupt - high to low pulse
-	attachInterrupt(pinIntD1, ReadD1, FALLING);			// hardware interrupt - high to low pulse
+	attachInterrupt(digitalPinToInterrupt(pinD0), ReadD0, FALLING);			// hardware interrupt - high to low pulse
+	attachInterrupt(digitalPinToInterrupt(pinD1), ReadD1, FALLING);			// hardware interrupt - high to low pulse
 	return true;
 }
 
