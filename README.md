@@ -36,7 +36,7 @@ Create a folder named Wiegand in Arduino's libraries folder.  You will have the 
 Execute Arduino IDE, select Example-->WiegandNG-->WiegandRawTest
 
 ### Example
-<pre><code>
+```c
 #include &lt;WiegandNG.h&gt;
 
 WiegandNG wg;
@@ -70,9 +70,12 @@ void PrintBinary(WiegandNG &tempwg) {
 void setup() {
 	Serial.begin(9600);
 
-	// for UNO just use wg.begin(), will default to Pin 2 and Pin 3 connected to D0 and D1 respectively
-	// initialize Wiegand ND for 48 bit data, every 8 bits take up 1 byte of Arduino memory
-	// as long as there is still memory, user can even capture 1024 bit Wiegand by calling wg.begin(1024)
+	// for UNO just use wg.begin(), will default to Pin 2 and Pin 3 
+	// connected to D0 and D1 respectively
+	// initialize Wiegand ND for 48 bit data, every 8 bits take 
+	// up 1 byte of Arduino memory
+	// as long as there is still memory, user can even capture 
+	// 1024 bit Wiegand by calling wg.begin(1024)
 
 	unsigned int pinD0 = 2;
 	unsigned int pinD1 = 3;
@@ -87,15 +90,15 @@ void setup() {
 
 void loop() {
 	if(wg.available()) {
-		wg.pause();							// pause Wiegand pin interrupts
+		wg.pause();			// pause Wiegand pin interrupts
 		Serial.print("Bits=");
-		Serial.println(wg.getBitCounted());	// display the number of bits counted
+		Serial.println(wg.getBitCounted()); // display the number of bits counted
 		Serial.print("RAW Binary=");
-		PrintBinary(wg);					// display raw data in binary form, raw data inclusive of PARITY
-		wg.clear();							// compulsory to call clear() to enable interrupts for subsequent data
+		PrintBinary(wg); // display raw data in binary form, raw data inclusive of PARITY
+		wg.clear();	// compulsory to call clear() to enable interrupts for subsequent data
 	}
 }
-</code></pre>
+```
 
 ## Acknowledgement
 The library is based on the [Wiegand 24 and Wiegand 36 Protocol Library for Arduino](https://github.com/monkeyboard/Wiegand-Protocol-Library-for-Arduino) and contributions from community listed on the page.
