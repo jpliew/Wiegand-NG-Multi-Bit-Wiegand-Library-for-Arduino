@@ -15,8 +15,8 @@ Wiegand NG supports unlimited bits (maximum memory allocatable by Arduino) and a
 
 The following are needed 
 
-* [Arduino] (http://www.arduino.cc) Any ATMEGA328 compatible board should work.
-* [Wiegand RFID Reader] (http://www.monkeyboard.org/products/85-developmentboard/84-rfid-wiegand-protocol-development-kit) The code was written for this reader however customers reported working with [HID] (http://www.hidglobal.com/products/cards-and-credentials) compatible readers.
+* [Arduino](http://www.arduino.cc) Any ATMEGA328 compatible board should work.
+* [Wiegand RFID Reader](http://www.monkeyboard.org/products/85-developmentboard/84-rfid-wiegand-protocol-development-kit) The code was written for this reader however customers reported working with [HID] (http://www.hidglobal.com/products/cards-and-credentials) compatible readers.
 * DATA0 of Wiegand connects to Arduino PIN 2 and DATA1 of Wiegand connects to Arduino PIN 3
 
 ## Installation 
