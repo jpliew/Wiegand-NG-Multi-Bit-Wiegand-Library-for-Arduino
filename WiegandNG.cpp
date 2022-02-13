@@ -124,8 +124,8 @@ bool WiegandNG::begin(uint8_t pinD0, uint8_t pinD1, unsigned int allocateBits, u
 
 	clear();
 	
-	pinMode(pinD0, INPUT);								// set D0 pin as input
-	pinMode(pinD1, INPUT);								// set D1 pin as input
+	pinMode(pinD0, INPUT_PULLUP);								// set D0 pin as input
+	pinMode(pinD1, INPUT_PULLUP);								// set D1 pin as input
 	attachInterrupt(digitalPinToInterrupt(pinD0), ReadD0, FALLING);			// hardware interrupt - high to low pulse
 	attachInterrupt(digitalPinToInterrupt(pinD1), ReadD1, FALLING);			// hardware interrupt - high to low pulse
 	return true;
